@@ -15,11 +15,29 @@ export class PromptGeneratorService {
         });
 
         const openai = new OpenAIApi(configuration);
-        const response = await openai.listModels()
-        console.log(response)
+        // const openaiModelLists = await openai.listModels()
+        // console.log(openaiModelLists)
+
+        // create chat completion
+        // const chatResponse = await openai.createChatCompletion({
+        //     model: "gpt-3.5-turbo",
+        //     messages: [
+        //         {
+        //             role: "user",
+        //             content: "Hello?"
+        //         }
+        //     ]
+        // })
+
+        // create images
+        const imageResponse = await openai.createImage({
+            "prompt": "A cute baby sea otter",
+            "n": 1,
+            "size": "1024x1024"
+        })
 
         return [
-            response.data.data,
+            imageResponse.data,
             "prompt 1",
             "prompt 2",
         ]

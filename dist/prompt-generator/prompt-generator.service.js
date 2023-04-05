@@ -22,10 +22,13 @@ let PromptGeneratorService = class PromptGeneratorService {
             apiKey: this.configService.get('OPENAI_API_KEY'),
         });
         const openai = new openai_1.OpenAIApi(configuration);
-        const response = await openai.listModels();
-        console.log(response);
+        const imageResponse = await openai.createImage({
+            "prompt": "A cute baby sea otter",
+            "n": 1,
+            "size": "1024x1024"
+        });
         return [
-            response.data.data,
+            imageResponse.data,
             "prompt 1",
             "prompt 2",
         ];
