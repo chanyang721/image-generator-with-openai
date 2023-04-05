@@ -1,9 +1,11 @@
 import { Module }        from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService }    from './app.service';
+import { AppController } from './app/app.controller';
+import { PromptGeneratorModule } from './prompt-generator/prompt-generator.module';
+import { ImageGeneratorModule } from './image-generator/image-generator.module';
+import { AppService }    from './app/app.service';
 
 @Module({
-  imports: [],
+  imports: [PromptGeneratorModule, ImageGeneratorModule],
   controllers: [AppController],
   providers: [AppService],
 })
