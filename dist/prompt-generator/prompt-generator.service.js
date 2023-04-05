@@ -18,14 +18,14 @@ let PromptGeneratorService = class PromptGeneratorService {
         this.configService = configService;
     }
     async getPromptList() {
-        const apiKey = this.configService.get('OPENAI_API_KEY');
         const configuration = new openai_1.Configuration({
-            apiKey: apiKey,
+            apiKey: this.configService.get('OPENAI_API_KEY'),
         });
         const openai = new openai_1.OpenAIApi(configuration);
-        const response = await openai.listFiles();
-        console.log(response.data);
+        const response = await openai.listModels();
+        console.log(response);
         return [
+            response.data.data,
             "prompt 1",
             "prompt 2",
         ];

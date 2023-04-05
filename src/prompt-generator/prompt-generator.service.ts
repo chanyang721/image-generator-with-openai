@@ -10,18 +10,16 @@ export class PromptGeneratorService {
 
 
     public async getPromptList(): Promise<Array<any>> {
-        // openai chatpat3.5에게 text 생성 요청
-        const apiKey = this.configService.get('OPENAI_API_KEY');
         const configuration = new Configuration({
-            // organization: this.configService.get('OPENAI_ORGANIZATION'),
-            apiKey: apiKey,
+            apiKey: this.configService.get('OPENAI_API_KEY'),
         });
+
         const openai = new OpenAIApi(configuration);
-        // const response = openai.
-        const response = await openai.listFiles();
-        console.log(response.data)
+        const response = await openai.listModels()
+        console.log(response)
 
         return [
+            response.data.data,
             "prompt 1",
             "prompt 2",
         ]
