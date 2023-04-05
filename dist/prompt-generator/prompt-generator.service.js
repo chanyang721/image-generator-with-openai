@@ -12,12 +12,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromptGeneratorService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const openai_1 = require("openai");
 let PromptGeneratorService = class PromptGeneratorService {
     constructor(configService) {
         this.configService = configService;
     }
     async getPromptList() {
-        const test = this.configService.get('OPEN_AI_API_KEY');
+        const apiKey = this.configService.get('OPENAI_API_KEY');
+        const configuration = new openai_1.Configuration({
+            apiKey: apiKey,
+        });
+        const openai = new openai_1.OpenAIApi(configuration);
+        const response = await openai.listFiles();
+        console.log(response.data);
         return [
             "prompt 1",
             "prompt 2",
